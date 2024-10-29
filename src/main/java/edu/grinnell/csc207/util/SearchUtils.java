@@ -47,7 +47,7 @@ public class SearchUtils {
           lb = mid + 1;
         } else {
           ub = mid;
-        }
+        } // if else
       }
     }
     throw new Exception(val + " is not in the array.");   
@@ -71,7 +71,31 @@ public class SearchUtils {
    *   values[index] == val
    */
   static int recursiveBinarySearch(int[] vals, int val) throws Exception {
-    return 0;   // STUB
+    int lb = 0;
+    int ub = vals.length;
+    int mid = lb + (ub - lb) / 2;
+    if (ub != lb) {
+      int[] recArr = new int[vals.length / 2];
+      if (vals[mid] == val) {
+        return mid;
+      } else if (vals[mid] > val) {
+        for (int i = 0; i < mid; i++) {
+          recArr[i] = vals[i];
+        } // for
+        return recursiveBinarySearch(recArr, val);
+      } else {
+        for (int i = 0; i < mid; i++) {
+          recArr[i] = vals[mid+i+1];
+        } // for
+        return recursiveBinarySearch(recArr, val) + mid;
+      } // else
+    } else {
+      if (vals[lb] == val) {
+        return lb;
+      } else {
+        throw new Exception("The array is empty");
+      } // else
+    } // else
   } // recursiveBinarySearch
 
   /**
@@ -148,8 +172,8 @@ public class SearchUtils {
    */
   public static int binarySearch(int[] vals, int val) throws Exception {
 
-    return iterativeBinarySearch(vals, val);
-    // return recursiveBinarySearch(vals, val);
+    //return iterativeBinarySearch(vals, val);
+    return recursiveBinarySearch(vals, val);
   } // binarySearch
 
 } // class SearchUtils
