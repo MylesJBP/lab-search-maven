@@ -145,4 +145,25 @@ public class TestSearch {
     assertBinarySearchFinds(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, 7);
     assertBinarySearchFinds(new int[] { 1, 2, 3, 4 }, 1);
   } // testBinarySearchEven()
+
+
+  /**
+   * Searching an even number length array.
+   */
+  @Test
+  void testBinarySearchMaster() throws Exception {
+    for (int i = 1; i <= 32; i++) {
+      int[] testArr = new int[i];
+      for (int j = 0; j < i; j++) {
+        testArr[j] = j*2;
+      } // for
+      for (int n = 0; n < i; n++) { 
+        // Make sure that value 2*i is in position i
+        assertBinarySearchFinds(testArr, 2*n);
+        // Make sure that odd values are not in the array
+        assertBinarySearchFails(testArr, 2*n+1);
+      } // for
+      assertBinarySearchFails(testArr, -1);
+    } // for
+  } // testBinarySearchMaster()
 } // class TestSearch
